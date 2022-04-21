@@ -64,7 +64,8 @@ Additional options that have an accompanying environment variable include:
 
 * `-e/--environment` or `CVE_ENVIRONMENT`: allows you to configure the deployment environment
   (that is, the URL at which the service is available) to interface with. Allowed values: `prod`,
-  `dev`.
+  `test`, and `dev`. Separate credentials are required for each environment. The `test` and `dev`
+  environments may not be consistenly available as the CVE backend services are still in development.
 
 * `--api-url` or `CVE_API_URL`: allows you to override the URL for the CVE API that would
   otherwise be determined by the deployment environment you selected. This is useful for local
@@ -109,10 +110,10 @@ Mark a user as inactive (again, assuming you have the `ADMIN` role):
 cve user update -u foo@bar.com --mark-inactive
 ```
 
-Reset your own API token:
+Reset your own API key:
 
 ```
-cve user reset-token
+cve user reset-key
 ```
 
 List all users in your organization:
@@ -157,6 +158,16 @@ tox -e py36
 tox -e py36 -- tests/test_cli.py::test_cve_show
 ```
 
+Any changes in the commands, their options, or help texts must be reflected in the generated man pages. To refresh
+them, run:
+
+```bash
+pip install click-man
+click-man cve
+# OR
+tox -e manpages
+```
+
 ---
 
-[CVE](https://cve.mitre.org/) is a trademark of [The MITRE Corporation](https://www.mitre.org/).
+[CVE](https://cve.org) is a registered trademark of [The MITRE Corporation](https://www.mitre.org).

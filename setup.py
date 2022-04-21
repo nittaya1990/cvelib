@@ -5,7 +5,19 @@ requires = [
     "requests>=2.24.0",
 ]
 
-test_requires = ["pytest"]
+extras_require = {
+    "dev": [
+        "black",
+        "click-man",
+        "flake8",
+        "isort",
+        "mypy",
+        "pytest",
+        "tox",
+        "types-click",
+        "types-requests",
+    ]
+}
 
 with open("README.md") as f:
     readme = f.read()
@@ -37,11 +49,12 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ],
     include_package_data=True,
     packages=["cvelib"],
     install_requires=requires,
-    tests_require=test_requires,
+    extras_require=extras_require,
     entry_points={
         "console_scripts": [
             "cve = cvelib.cli:cli",
